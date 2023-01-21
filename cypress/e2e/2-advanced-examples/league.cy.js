@@ -1,4 +1,4 @@
-const requiredLeague = require("../../fixtures/league");
+const requiredLeague = require("../../fixtures/league-2023");
 
 context("Files", () => {
   describe("Find the league", () => {
