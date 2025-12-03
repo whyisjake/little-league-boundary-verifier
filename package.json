@@ -1,14 +1,16 @@
 {
   "name": "league-finder",
-  "version": "1.0.0",
-  "description": "Little League Finder",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Little League Boundary Verification Tool",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "verify": "node verify.js"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "cypress": "^9.3.1"
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "googleapis": "^166.0.0",
+    "playwright": "^1.49.0"
   }
 }
