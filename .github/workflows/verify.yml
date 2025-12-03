@@ -12,6 +12,25 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 360  # 6 hours (GitHub's max for public repos)
+    strategy:
+      fail-fast: false
+      matrix:
+        division:
+          # Baseball divisions
+          - "AA - Player Pitch - Evaluation Based - (Age 8-9)"
+          - "AAA - Player Pitch - Evaluation Based (Age 10-11)"
+          - "Farm - Coach Pitch (Age 6-7)"
+          - "Intermediate (50/70) Teenage Baseball (League Age 13)"
+          - "Junior Teenage Baseball (League Age 14-15)"
+          - "Major - Player Pitch - Evaluation Based (Age 11-12)"
+          - "Peanuts - Tee Ball (Age 4-5)"
+          - "Single-A - Machine Pitch - Evaluation Based (Age 7-8)"
+          # Softball divisions
+          - "AA - Development Division: Ages 7-9 (experienced 2nd graders, 3rd grade, and 4th grade)"
+          - "AAA - Intermediate Division: Ages 9-11 (advanced 4th grade, 5th grade, and newer 6th graders)"
+          - "Majors - Competitive Play: Ages 11-12 (6th grade, 5th and 7th grade based on experience)"
+          - "Seniors - Advanced Play: Ages 13-16 (7th and 8th grade)"
+          - "Single A - Intro Division: Ages 5-7 (Kindergarten, 1st grade, and new or tentative 2nd graders)"
 
     steps:
       - uses: actions/checkout@v4
@@ -36,13 +55,14 @@ jobs:
           GOOGLE_SHEETS_TAB: ${{ secrets.GOOGLE_SHEETS_TAB }}
           GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
           GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          DIVISION: ${{ matrix.division }}
         run: npm run verify
 
       - name: Upload results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: verification-results
+          name: results-${{ matrix.division }}
           path: results.json
 
       - name: Check verification result

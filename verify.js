@@ -28,6 +28,14 @@ if (process.env.GOOGLE_SHEETS_ID) {
   process.exit(1);
 }
 
+// Filter by division if specified
+const divisionFilter = process.env.DIVISION;
+if (divisionFilter) {
+  const beforeCount = kids.length;
+  kids = kids.filter((kid) => kid.division === divisionFilter);
+  console.log(`Filtered to division "${divisionFilter}": ${kids.length} of ${beforeCount} registrations`);
+}
+
 console.log(
   `\nVerifying ${kids.length} registrations against ${LEAGUE_NAME}\n`
 );

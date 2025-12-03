@@ -55,6 +55,9 @@ export async function loadFromGoogleSheets() {
         'birthdate': 'birthday',
         'player birth date': 'birthday',
         'dob': 'birthday',
+        'division': 'division',
+        'division name': 'division',
+        'player division': 'division',
       };
 
       const fieldName = fieldMap[header] || header;
