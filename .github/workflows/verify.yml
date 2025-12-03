@@ -16,34 +16,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Baseball divisions
-          - division: "AA - Player Pitch - Evaluation Based - (Age 8-9)"
-            slug: "baseball-aa"
-          - division: "AAA - Player Pitch - Evaluation Based (Age 10-11)"
-            slug: "baseball-aaa"
-          - division: "Farm - Coach Pitch (Age 6-7)"
-            slug: "baseball-farm"
-          - division: "Intermediate (50/70) Teenage Baseball (League Age 13)"
-            slug: "baseball-intermediate"
-          - division: "Junior Teenage Baseball (League Age 14-15)"
-            slug: "baseball-junior"
-          - division: "Major - Player Pitch - Evaluation Based (Age 11-12)"
-            slug: "baseball-major"
-          - division: "Peanuts - Tee Ball (Age 4-5)"
-            slug: "baseball-peanuts"
-          - division: "Single-A - Machine Pitch - Evaluation Based (Age 7-8)"
-            slug: "baseball-single-a"
-          # Softball divisions
-          - division: "AA - Development Division: Ages 7-9 (experienced 2nd graders, 3rd grade, and 4th grade)"
-            slug: "softball-aa"
-          - division: "AAA - Intermediate Division: Ages 9-11 (advanced 4th grade, 5th grade, and newer 6th graders)"
-            slug: "softball-aaa"
-          - division: "Majors - Competitive Play: Ages 11-12 (6th grade, 5th and 7th grade based on experience)"
-            slug: "softball-majors"
-          - division: "Seniors - Advanced Play: Ages 13-16 (7th and 8th grade)"
-            slug: "softball-seniors"
-          - division: "Single A - Intro Division: Ages 5-7 (Kindergarten, 1st grade, and new or tentative 2nd graders)"
-            slug: "softball-single-a"
+          # UPDATE THESE with your league's division names from your spreadsheet
+          # The division value must match exactly what's in your "Division Name" column
+          - division: "T-Ball (Age 4-5)"
+            slug: "tball"
+          - division: "Coach Pitch (Age 6-7)"
+            slug: "coach-pitch"
+          - division: "Minor League (Age 8-9)"
+            slug: "minors"
+          - division: "Major League (Age 10-12)"
+            slug: "majors"
+          # Add more divisions as needed for your league
 
     steps:
       - uses: actions/checkout@v4
@@ -68,15 +51,12 @@ jobs:
           GOOGLE_SHEETS_TAB: ${{ secrets.GOOGLE_SHEETS_TAB }}
           GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
           GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          LEAGUE_NAME: ${{ secrets.LEAGUE_NAME }}
           DIVISION: ${{ matrix.division }}
         run: npm run verify
 
-      - name: Upload results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: results-${{ matrix.slug }}
-          path: results.json
+      # Note: Artifacts removed to protect player privacy on public repos
+      # Results are saved locally and shown in job summary (counts only)
 
       - name: Check verification result
         if: steps.verify.outcome == 'failure'

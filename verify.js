@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 import { readFileSync, existsSync, writeFileSync, appendFileSync } from "fs";
 import { loadFromGoogleSheets } from "./sheets.js";
 
-const LEAGUE_NAME = "WALNUT CREEK LL";
+const LEAGUE_NAME = process.env.LEAGUE_NAME || "YOUR LEAGUE NAME";
 const FINDER_URL = "https://maps.littleleague.org/leaguefinder/";
 const DELAY_BETWEEN_REQUESTS = 30000; // 30 seconds between each search
 const RATE_LIMIT_DELAY = 60000; // 60 seconds wait if rate limited
@@ -319,20 +319,12 @@ const resultsFile = "results.json";
 writeFileSync(resultsFile, JSON.stringify(results, null, 2));
 console.log(`Results saved to ${resultsFile}`);
 
-// Write GitHub Actions summary if running in CI
+// Write GitHub Actions summary if running in CI (counts only, no PII)
 if (process.env.GITHUB_STEP_SUMMARY) {
-  let summary = `## League Verification Results\n\n`;
+  const division = process.env.DIVISION || "All";
+  let summary = `## ${division}\n\n`;
   summary += `✅ **Passed:** ${results.pass.length}\n`;
-  summary += `❌ **Failed:** ${results.fail.length}\n\n`;
-
-  if (results.fail.length > 0) {
-    summary += `### Failed Registrations\n\n`;
-    summary += `| Name | Address | Result |\n`;
-    summary += `|------|---------|--------|\n`;
-    for (const f of results.fail) {
-      summary += `| ${f.name} | ${f.address} | ${f.foundLeague || f.error} |\n`;
-    }
-  }
+  summary += `❌ **Failed:** ${results.fail.length}\n`;
 
   appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
   console.log("GitHub Actions summary written");

@@ -1,8 +1,6 @@
-# Little League Finder
+# Little League Boundary Verifier
 
-[![Verify League Boundaries](https://github.com/whyisjake/Little-League-Finder/actions/workflows/verify.yml/badge.svg)](https://github.com/whyisjake/Little-League-Finder/actions/workflows/verify.yml)
-
-Automated verification tool that checks if player addresses fall within Little League boundaries using the official [Little League Finder](https://maps.littleleague.org/leaguefinder/).
+Automated verification tool that checks if player addresses fall within your Little League's boundaries using the official [Little League Finder](https://maps.littleleague.org/leaguefinder/).
 
 ## Features
 
@@ -11,7 +9,22 @@ Automated verification tool that checks if player addresses fall within Little L
 - Supports baseball, softball, and challenger divisions
 - Handles rate limiting with automatic retries
 - Runs divisions in parallel via GitHub Actions matrix
-- Generates detailed reports with pass/fail results
+- Privacy-safe: only shows pass/fail counts publicly (no player names/addresses)
+
+## Quick Start (Fork This Repo)
+
+1. **Fork this repository** to your own GitHub account
+
+2. **Add secrets** in Settings > Secrets and variables > Actions:
+   - `LEAGUE_NAME` - Your league name as it appears in Little League Finder (e.g., "EXAMPLE CITY LL")
+   - `GOOGLE_SHEETS_ID` - The ID from your spreadsheet URL
+   - `GOOGLE_SHEETS_TAB` - The tab name containing player data
+   - `GOOGLE_SERVICE_ACCOUNT_EMAIL` - Your service account email
+   - `GOOGLE_PRIVATE_KEY` - Your service account private key
+
+3. **Update divisions** in `.github/workflows/verify.yml` to match your league's division names
+
+4. **Run the workflow** from Actions > "Verify League Boundaries" > "Run workflow"
 
 ## Setup
 
@@ -59,7 +72,7 @@ Create `data/kids-2025.json` with player data:
     "zip": "12345",
     "sport": "baseball",
     "birthday": "07/20/2017",
-    "division": "AAA - Player Pitch - Evaluation Based (Age 10-11)"
+    "division": "Major League (Age 10-12)"
   }
 ]
 ```
@@ -69,29 +82,38 @@ Create `data/kids-2025.json` with player data:
 ### Run locally
 
 ```bash
+# Set your league name
+export LEAGUE_NAME="YOUR LEAGUE NAME LL"
+
 npm run verify
 ```
 
 ### Run via GitHub Actions
 
-1. Add secrets to your repository:
-   - `GOOGLE_SHEETS_ID`
-   - `GOOGLE_SHEETS_TAB`
-   - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-   - `GOOGLE_PRIVATE_KEY`
+1. Add the required secrets (see Quick Start above)
 
-2. Go to Actions > "Verify League Boundaries" > "Run workflow"
+2. Update the division matrix in `.github/workflows/verify.yml` to match your divisions
 
-3. Download results from the Artifacts section when complete
+3. Go to Actions > "Verify League Boundaries" > "Run workflow"
+
+4. View results in the job summary (pass/fail counts per division)
 
 ## Configuration
 
-Edit `verify.js` to customize:
+Set via environment variables or `.env` file:
 
-- `LEAGUE_NAME` - The league name to match (default: "WALNUT CREEK LL")
+- `LEAGUE_NAME` - Your league name to match (required)
+- `DIVISION` - Filter to a specific division (optional)
 - `DELAY_BETWEEN_REQUESTS` - Delay between lookups in ms (default: 30000)
 - `RATE_LIMIT_DELAY` - Wait time when rate limited (default: 60000)
 - `MAX_RETRIES` - Retry attempts for rate limits (default: 3)
+
+## Privacy
+
+This tool is designed to be safe for public repositories:
+- Job summaries only show pass/fail **counts** (no names or addresses)
+- Detailed results are saved to `results.json` locally but not uploaded as artifacts
+- Player data never leaves your Google Sheet or local machine
 
 ## License
 
