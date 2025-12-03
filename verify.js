@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 import { readFileSync, existsSync, writeFileSync, appendFileSync } from "fs";
 import { loadFromGoogleSheets } from "./sheets.js";
 
-const LEAGUE_NAME = process.env.LEAGUE_NAME || "YOUR LEAGUE NAME";
+const LEAGUE_NAME = process.env.LEAGUE_NAME || "WALNUT CREEK LL";
 const FINDER_URL = "https://maps.littleleague.org/leaguefinder/";
 const DELAY_BETWEEN_REQUESTS = 30000; // 30 seconds between each search
 const RATE_LIMIT_DELAY = 60000; // 60 seconds wait if rate limited

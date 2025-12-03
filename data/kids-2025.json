@@ -2,10 +2,10 @@
   {
     "firstname": "Test",
     "lastname": "Player",
-    "address": "1455 Market Street",
-    "city": "San Francisco",
+    "address": "1100 Lucille Lane",
+    "city": "Concord",
     "state": "CA",
-    "zip": "94103",
+    "zip": "94521",
     "sport": "baseball",
     "birthday": "07/20/2017",
     "division": "Minor League (Age 8-9)"
@@ -13,10 +13,10 @@
   {
     "firstname": "Jane",
     "lastname": "Doe",
-    "address": "200 Santa Monica Pier",
-    "city": "Santa Monica",
+    "address": "425 Castle Rock Road",
+    "city": "Walnut Creek",
     "state": "CA",
-    "zip": "90401",
+    "zip": "94598",
     "sport": "softball",
     "birthday": "03/15/2016",
     "division": "Major League (Age 10-12)"
