@@ -2,21 +2,23 @@
   {
     "firstname": "Test",
     "lastname": "Player",
-    "address": "123 Main Street",
-    "city": "Your City",
+    "address": "1455 Market Street",
+    "city": "San Francisco",
     "state": "CA",
-    "zip": "12345",
+    "zip": "94103",
     "sport": "baseball",
-    "birthday": "07/20/2017"
+    "birthday": "07/20/2017",
+    "division": "Minor League (Age 8-9)"
   },
   {
     "firstname": "Jane",
     "lastname": "Doe",
-    "address": "456 Oak Avenue",
-    "city": "Your City",
+    "address": "200 Santa Monica Pier",
+    "city": "Santa Monica",
     "state": "CA",
-    "zip": "12345",
+    "zip": "90401",
     "sport": "softball",
-    "birthday": "03/15/2016"
+    "birthday": "03/15/2016",
+    "division": "Major League (Age 10-12)"
   }
 ]
