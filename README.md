@@ -1,5 +1,7 @@
 # Little League Boundary Verifier
 
+[![Verify League Boundaries](https://github.com/whyisjake/little-league-boundary-verifier/actions/workflows/verify.yml/badge.svg)](https://github.com/whyisjake/little-league-boundary-verifier/actions/workflows/verify.yml)
+
 Automated verification tool that checks if player addresses fall within your Little League's boundaries using the official [Little League Finder](https://maps.littleleague.org/leaguefinder/).
 
 ## Features
