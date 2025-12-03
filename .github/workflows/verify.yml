@@ -11,7 +11,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 480  # 8 hours max
+    timeout-minutes: 360  # 6 hours (GitHub's max for public repos)
 
     steps:
       - uses: actions/checkout@v4
