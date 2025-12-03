@@ -1,0 +1,22 @@
+[
+  {
+    "firstname": "Test",
+    "lastname": "Player",
+    "address": "123 Main Street",
+    "city": "Your City",
+    "state": "CA",
+    "zip": "12345",
+    "sport": "baseball",
+    "birthday": "07/20/2017"
+  },
+  {
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "address": "456 Oak Avenue",
+    "city": "Your City",
+    "state": "CA",
+    "zip": "12345",
+    "sport": "softball",
+    "birthday": "03/15/2016"
+  }
+]
